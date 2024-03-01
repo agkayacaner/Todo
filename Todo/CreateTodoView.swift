@@ -6,10 +6,33 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CreateTodoView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
+    @State private var title = ""
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            Form {
+                Section(header: Text("Title")) {
+                    TextField("Title", text: $title)
+                        .sensoryFeedback(.selection, trigger: title)
+                }
+                Section {
+                    Button {
+                        let todo = Todo(title: title)
+                        modelContext.insert(todo)
+                        
+                        dismiss()
+                    } label: {
+                        Text("Save")
+                    }
+                }
+            }
+            .navigationTitle("Create Todo")
+        }
     }
 }
 
