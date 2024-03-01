@@ -30,6 +30,7 @@ struct ContentView: View {
                                 
                             Text(todo.title)
                                 .strikethrough(todo.isCompleted)
+                                .animation(.bouncy)
                         }
                         .foregroundColor(todo.isCompleted ? .secondary : .primary)
                     }
