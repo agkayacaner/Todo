@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var modelContext
+    @State private var isShowing = false
+
+    @Query(sort: \Todo.createdAt,order: .reverse) private var todos: [Todo]
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
